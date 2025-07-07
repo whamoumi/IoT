@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config1
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>APP 1</title>
+    </head>
+    <body>
+        <p>This is Deployment of App 1!<p>
+    </body>
+    </html>
