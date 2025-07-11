@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
       kubectl apply -f /home/vagrant/data/service/service3.yaml
       
       # 4. Ingress
-      kubectl apply -f /home/vagrant/data/ingress/ingress.yaml
+      kubectl apply -f /home/vagrant/data/Ingress/ingress.yaml
 
     SHELL
   end
