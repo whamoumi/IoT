@@ -21,13 +21,13 @@ kubectl wait --for=condition=Ready pod -l app.kubernetes.io/name=argocd-server -
 kubectl apply -n dev -f ../confs/deployment.yaml
 
 # 6. Attendre que les pods et déploiements dans `dev` soient prêts
-kubectl wait --for=condition=Ready pod --all -n dev --timeout=120s
+kubectl wait --for=condition=Ready pod --all -n dev --timeout=30s
 
-kubectl wait --for=condition=Ready deployment --all -n dev --timeout=120s
+kubectl wait --for=condition=Ready deployment --all -n dev --timeout=30s
 
 
 # 7. Exposer les services en LoadBalancer (pour accès via localhost)
-nohup kubectl port-forward svc/argocd-server -n argocd 8080:443 >/dev/null 2>&1 &
+nohup sudo kubectl port-forward svc/argocd-server -n argocd 8080:443 >/dev/null 2>&1 &
 
 
 
@@ -39,11 +39,11 @@ PASSWORD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=
 echo "🔑 Mot de passe admin Argo CD: $PASSWORD"
 sleep 5
 #Login à Argo CD
-argocd login localhost:8080 --username admin --password $PASSWORD --insecure --grpc-web
+sudo argocd login localhost:8080 --username admin --password $PASSWORD --insecure --grpc-web
 # 9. Login à Argo CD
 
 # 10. Créer l'application Argo CD
-argocd app create development \
+sudo argocd app create development \
   --repo https://github.com/whamoumi/dev \
   --path manifests \
   --dest-server https://kubernetes.default.svc \
